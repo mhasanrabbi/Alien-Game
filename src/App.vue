@@ -154,6 +154,14 @@ export default {
       return array;
     },
   },
+  watch: {
+    score(newValue, oldValue) {
+      console.log(oldValue);
+      gsap.to('.bottom-clip-path, .top-clip-path', {
+        y: -newValue * 6,
+      });
+    },
+  },
 };
 </script>
 
@@ -168,7 +176,7 @@ body {
   color: #2c3e50;
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   overflow: hidden;
   background-size: cover !important;
   background: url('./assets/background.svg') no-repeat center center scroll,
