@@ -19,7 +19,7 @@
       <button @click="pickCharacter">Pick your character!</button>
     </GamestateStart>
 
-    <section v-else>
+    <section v-else-if="uiState === 'characterChosen'">
       <svg viewBox="0 -180 1628 1180" class="main">
         <defs>
           <clipPath id="bottom-clip">
@@ -97,6 +97,8 @@
         </p>
       </div>
     </section>
+
+    <GamestateFinish v-else />
   </div>
 </template>
 
@@ -109,10 +111,12 @@ import Score from '@/components/Score.vue';
 import Zombie from '@/components/Zombie.vue';
 import { mapState } from 'vuex';
 import GamestateStart from '@/components/GamestateStart.vue';
+import GamestateFinish from '@/components/GamestateFinish.vue';
 
 export default {
   components: {
     GamestateStart,
+    GamestateFinish,
     Artist,
     Baker,
     Friend,

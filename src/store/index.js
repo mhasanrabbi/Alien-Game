@@ -57,7 +57,6 @@ export default new Vuex.Store({
       state.uiState = uistate;
     },
     pickQuestion(state, character) {
-      console.log(character);
       character === state.character ? (state.score += 13) : (state.score -= 13);
 
       if (state.questionIndex < state.questions.length - 1) {
@@ -67,6 +66,11 @@ export default new Vuex.Store({
           ? (state.uiState = 'won')
           : (state.uiState = 'lost');
       }
+    },
+    restartGame(state) {
+      state.uiState = 'start';
+      state.score = 0;
+      state.questionIndex = 0;
     },
   },
   actions: {},
