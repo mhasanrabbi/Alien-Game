@@ -15,6 +15,8 @@
         />
         <label :for="option">{{ option }}</label>
       </p>
+
+      <button @click="pickCharacter">Pick your character!</button>
     </GamestateStart>
 
     <section v-else>
@@ -40,13 +42,18 @@
           </clipPath>
         </defs>
 
+        <Friend />
+        <Score />
+
+        <component :is="character"></component>
+
         <text
           x="1000"
           y="930"
           style="font: normal 45px 'Recursive; text-transform: uppercase;"
           class="text"
         >
-          Character Name
+          {{ character }}
         </text>
 
         <path fill="#f0959f" d="M0 842h657v192H0z" />
@@ -82,12 +89,24 @@
 </template>
 
 <script>
+import Artist from '@/components/Artist.vue';
+import Baker from '@/components/Baker.vue';
+import Friend from '@/components/Friend.vue';
+import Mechanic from '@/components/Mechanic.vue';
+import Score from '@/components/Score.vue';
+import Zombie from '@/components/Zombie.vue';
 import { mapState } from 'vuex';
 import GamestateStart from '@/components/GamestateStart.vue';
 
 export default {
   components: {
     GamestateStart,
+    Artist,
+    Baker,
+    Friend,
+    Mechanic,
+    Score,
+    Zombie,
   },
   data() {
     return {
@@ -96,6 +115,12 @@ export default {
   },
   computed: {
     ...mapState(['uiState', 'questions', 'characterChoices', 'character']),
+  },
+  methods: {
+    pickCharacter() {
+      this.$store.commit('pickCharacter', this.characterinput);
+      this.$store.commit('updateUIState', 'characterChosen');
+    },
   },
 };
 </script>
